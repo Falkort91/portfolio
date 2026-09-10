@@ -1,11 +1,12 @@
 <!-- app/components/home/DissolveStage.vue -->
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, type ComponentPublicInstance } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch, type ComponentPublicInstance } from 'vue'
 import { captureElement } from '~/utils/sectionCapture'
 import { createScrollNoiseTracker } from '~/utils/scrollNoise'
 import { computeStageLayout, findStageSegment, ownScrollFor } from '~/utils/scrollStageLayout'
 import type { StageLayout } from '~/utils/scrollStageLayout'
 import { SECTION_ACTIVE_EVENT } from '~/composables/useSectionActive'
+import { useTheme } from '~/composables/useTheme'
 
 const SECTION_COUNT = 5
 // Fraction de la hauteur de scène allouée "de lecture" minimum par section, même si son
@@ -58,6 +59,12 @@ let capturedTo: HTMLCanvasElement | null = null
 let capturedPairKey: string | null = null
 let isCapturing = false
 
+function invalidateCapture() {
+  capturedPairKey = null
+  capturedFrom = null
+  capturedTo = null
+}
+
 const noiseTracker = createScrollNoiseTracker()
 let noiseIntensity = 0
 let noiseTime = 0
@@ -83,9 +90,7 @@ function computeLayout() {
   }
 
   // La mise en page a pu changer : on invalide le cache de capture en cours.
-  capturedPairKey = null
-  capturedFrom = null
-  capturedTo = null
+  invalidateCapture()
 }
 
 function setInert(i: number, isInert: boolean) {
@@ -282,6 +287,12 @@ function handleResize() {
   computeLayout()
 }
 
+const { theme } = useTheme()
+// Les screenshots capturés (capturedFrom/capturedTo) figent les couleurs de fond du thème
+// courant. Sans cette invalidation, changer de thème sans changer de paire de sections
+// laisse une bande de l'ancien thème (noire en clair, blanche en sombre) autour de la ligne.
+let stopThemeWatch: (() => void) | null = null
+
 onMounted(() => {
   if (canvasEl.value) ctx = canvasEl.value.getContext('2d')
   computeLayout()
@@ -289,6 +300,7 @@ onMounted(() => {
   rafId = requestAnimationFrame(loop)
   window.addEventListener('resize', handleResize)
   document.addEventListener('click', handleDocumentClick)
+  stopThemeWatch = watch(theme, invalidateCapture)
 
   const initialHash = window.location.hash.slice(1)
   if (initialHash in ANCHOR_TO_INDEX) {
@@ -300,6 +312,7 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(rafId)
   window.removeEventListener('resize', handleResize)
   document.removeEventListener('click', handleDocumentClick)
+  stopThemeWatch?.()
 })
 </script>
 
