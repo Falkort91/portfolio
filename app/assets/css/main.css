@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: 250 250 252;
+  --color-bg-alt: 255 255 255;
+  --color-text: 15 21 18;
+  --color-text-muted: 71 85 79;
+  --color-border: 226 232 229;
+  --color-accent-green: 16 130 58;
+  --color-accent-cyan: 0 118 180;
+  --color-accent-magenta: 190 24 93;
+}
+
+.dark {
+  --color-bg: 5 6 8;
+  --color-bg-alt: 13 15 13;
+  --color-text: 226 232 229;
+  --color-text-muted: 148 163 155;
+  --color-border: 31 42 36;
+  --color-accent-green: 0 255 140;
+  --color-accent-cyan: 0 240 255;
+  --color-accent-magenta: 255 0 200;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Réserve toujours la place de la scrollbar : sans ça, une page qui dépasse la hauteur
+     de l'écran grignote le padding droit visuellement (scrollbar) alors que celles qui
+     tiennent sur un écran ne le font pas — l'espacement gauche/droite paraît alors inégal
+     selon la longueur de la page. */
+  scrollbar-gutter: stable;
+  /* Firefox : piste/curseur aux couleurs du thème plutôt que la scrollbar système. */
+  scrollbar-color: rgb(var(--color-border)) rgb(var(--color-bg));
+  scrollbar-width: thin;
+}
+
+body {
+  @apply bg-bg text-text font-mono transition-colors duration-300;
+}
+
+/* Scrollbar aux couleurs du thème (Chrome/Edge/Safari — voir scrollbar-color ci-dessus
+   pour Firefox). Curseur discret par défaut (même ton que les bordures), qui vire au vert
+   accent au survol, comme le reste des éléments interactifs du site. Le border transparent
+   + background-clip: padding-box donne un curseur visuellement plus fin que la piste, sans
+   dépendre d'une largeur de scrollbar différente entre navigateurs. */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-bg));
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-border));
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-accent-green) / 0.6);
+}
+
+/* Bulle de dialogue pour la phrase d'accroche (comme si la photo "parlait") — pointe visible
+   seulement à partir de md, quand la photo est bien à gauche du texte (en dessous, layout empilé,
+   une pointe pointant "à gauche" n'aurait pas de sens visuel). Double triangle (bordure + fond)
+   pour simuler un contour, même technique qu'un bouton avec bordure — couleur alignée sur la
+   bordure accent-green de la bulle.
+   box-shadow façon "sticker" (halo vert) pour que la bulle se détache du fond sombre — cohérent
+   avec le glow déjà utilisé ailleurs sur le site (glitch-hover, terminal-cursor). */
+.speech-bubble {
+  position: relative;
+  box-shadow: 0 0 24px -6px rgb(var(--color-accent-green) / 0.4);
+}
+@media (min-width: 768px) {
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: -0.75rem;
+    width: 0;
+    height: 0;
+    border-top: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid transparent;
+    border-right: 0.75rem solid rgb(var(--color-accent-green));
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 1.625rem;
+    left: -0.625rem;
+    width: 0;
+    height: 0;
+    border-top: 0.375rem solid transparent;
+    border-bottom: 0.375rem solid transparent;
+    border-right: 0.625rem solid rgb(var(--color-bg-alt));
+  }
+}
+
+.glitch-hover {
+  position: relative;
+  display: inline-block;
+}
+.glitch-hover:hover,
+.glitch-hover.auto-glitch {
+  animation: glitch-shift 0.28s steps(2, end) 2;
+}
+@keyframes glitch-shift {
+  0% {
+    text-shadow: 2px 0 rgb(var(--color-accent-magenta)), -2px 0 rgb(var(--color-accent-cyan));
+    transform: translate(0, 0);
+  }
+  50% {
+    text-shadow: -2px 0 rgb(var(--color-accent-magenta)), 2px 0 rgb(var(--color-accent-cyan));
+    transform: translate(-1px, 1px);
+  }
+  100% {
+    text-shadow: 2px 0 rgb(var(--color-accent-magenta)), -2px 0 rgb(var(--color-accent-cyan));
+    transform: translate(0, 0);
+  }
+}
+
+.dark .scanline-bg {
+  position: relative;
+  overflow: hidden;
+}
+.dark .scanline-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    rgb(var(--color-accent-cyan) / 0.03) 0px,
+    rgb(var(--color-accent-cyan) / 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Rotation continue des icônes de compétences (SkillTermRow), autour de leur axe
+   vertical (rotateY) plutôt qu'à plat (rotate) : effet "carte qui tourne sur elle-même".
+   Le perspective sur le wrapper (pas sur l'icône : la perspective doit venir d'un
+   ancêtre pour produire l'effet de profondeur) donne le raccourci visuel qui suggère
+   le volume. animation-delay négatif posé en inline (voir composant) pour désynchroniser
+   les icônes entre elles dès le premier rendu.
+
+   Une icône plate seule s'annule visuellement à 90/270deg (une surface sans épaisseur
+   vue par la tranche n'a plus de largeur) — empiler des copies décalées en Z ne suffit
+   pas à corriger ça : chaque copie reste individuellement une surface plate qui s'annule
+   au même angle, seule sa position change. La vraie solution est géométrique : .icon-3d
+   forme une boîte à 4 faces dans un contexte 3D partagé (transform-style: preserve-3d) —
+   face avant (icône, translateZ positif), face arrière (icône assombrie, translateZ
+   négatif + rotateY 180 pour rester lisible), et deux tranches latérales (barres pleines,
+   translateZ + rotateY ±90 pour se placer sur les bords gauche/droit). Les tranches sont
+   sur la tourne, invisibles de face (vues par leur propre tranche, épaisseur nulle) mais
+   deviennent la seule face visible pile à 90/270deg, quand avant/arrière s'annulent —
+   il y a donc toujours une face de la boîte face à la caméra. Le pic de luminosité dans
+   l'animation tombe exactement sur ces passages (25%/75%) pour simuler un reflet sur la
+   tranche au moment où elle est montrée. Une seule animation (sur .icon-3d) anime toute
+   la boîte ; chaque face n'a qu'un transform statique, composé automatiquement. */
+.icon-spin-perspective {
+  perspective: 12rem;
+}
+.icon-3d {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: icon-spin 7s linear infinite;
+}
+.icon-3d-face {
+  position: absolute;
+  inset: 0;
+}
+.icon-3d-face--front {
+  transform: translateZ(1.5px);
+}
+.icon-3d-face--back {
+  transform: translateZ(-1.5px) rotateY(180deg);
+  color: rgb(var(--color-accent-green) / 0.55);
+}
+.icon-3d-edge {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 1.5px);
+  width: 3px;
+  height: 100%;
+  border-radius: 1px;
+  background: rgb(var(--color-accent-green) / 0.7);
+}
+.icon-3d-edge--right {
+  transform: rotateY(90deg) translateZ(10px);
+}
+.icon-3d-edge--left {
+  transform: rotateY(-90deg) translateZ(10px);
+}
+@keyframes icon-spin {
+  0% { transform: rotateY(0deg); filter: brightness(1); }
+  25% { transform: rotateY(90deg); filter: brightness(1.6); }
+  50% { transform: rotateY(180deg); filter: brightness(1); }
+  75% { transform: rotateY(270deg); filter: brightness(1.6); }
+  100% { transform: rotateY(360deg); filter: brightness(1); }
+}
+
+/* Fond "mesh" décoratif du panneau visuel des projets phares (ProjectCardFeatured) :
+   dégradés radiaux dans les couleurs accent + grille fine, en attendant de vraies
+   captures d'écran (project.images). ::after en z-index 0 pour que le contenu du
+   panneau (mark ou <img>), en position relative, reste toujours au-dessus. */
+.project-visual {
+  position: relative;
+  background:
+    radial-gradient(circle at 25% 20%, rgb(var(--color-accent-cyan) / 0.35), transparent 55%),
+    radial-gradient(circle at 80% 75%, rgb(var(--color-accent-magenta) / 0.3), transparent 55%),
+    linear-gradient(160deg, rgb(var(--color-bg-alt)), rgb(var(--color-bg)));
+}
+.project-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgb(var(--color-text) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-text) / 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Pulsation lente du chevron des projets dépliables (TimelineItem) : signale que
+   l'élément est interactif avant tout clic. Coupée dès l'ouverture du <details>
+   (group-open), l'icône reste alors fixe à pleine opacité. */
+.chevron-hint {
+  animation: chevron-blink 2.4s ease-in-out infinite;
+}
+.group[open] .chevron-hint {
+  animation: none;
+  opacity: 1;
+}
+@keyframes chevron-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Variante "vivante" du scanline-bg : légère variation d'opacité façon tube CRT.
+   Classe séparée (plutôt que toujours animer .scanline-bg) pour garder la texture
+   statique disponible ailleurs sans lui imposer ce mouvement. */
+.dark .scanline-flicker::after {
+  animation: scan-flicker 6s ease-in-out infinite;
+}
+@keyframes scan-flicker {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Masque le triangle natif de <summary> : on utilise notre propre chevron (Icon) à la place. */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.terminal-cursor::after {
+  content: '_';
+  animation: blink 1s step-start infinite;
+  color: rgb(var(--color-accent-green));
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-hover:hover,
+  .glitch-hover.auto-glitch,
+  .terminal-cursor::after,
+  .scanline-flicker::after,
+  .chevron-hint,
+  .icon-spin {
+    animation: none;
+  }
+}

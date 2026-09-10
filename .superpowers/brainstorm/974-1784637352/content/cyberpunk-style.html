@@ -1,0 +1,80 @@
+<style>
+@keyframes matrixfall {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 200px; }
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 24%, 55% { opacity: 0.6; }
+}
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.mtx-rain {
+  background-image: repeating-linear-gradient(180deg, rgba(0,255,140,0.35) 0px, rgba(0,255,140,0.35) 1px, transparent 1px, transparent 14px),
+                     repeating-linear-gradient(90deg, rgba(0,255,140,0.15) 0px, rgba(0,255,140,0.15) 1px, transparent 1px, transparent 10px);
+  animation: matrixfall 4s linear infinite;
+}
+.cy-scanline {
+  position:absolute; left:0; right:0; height:40px;
+  background:linear-gradient(180deg, transparent, rgba(255,0,200,0.15), transparent);
+  animation: scan 3s linear infinite;
+}
+</style>
+
+<h2>Direction futuriste / cyberpunk — laquelle correspond le mieux ?</h2>
+<p class="subtitle">Trois interprétations, du plus "code Matrix" au plus "néon Blade Runner". Toutes restent lisibles pour un recruteur — l'effet reste discret, pas envahissant.</p>
+
+<div class="cards">
+  <div class="card" data-choice="matrix-code" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mtx-rain" style="position:relative;height:100%;background-color:#000;padding:14px;color:#00ff8c;font-family:monospace;overflow:hidden;">
+        <div style="font-size:10px;opacity:0.7;">01 10 01 11 00 10 &gt;&gt;&gt; 01 10</div>
+        <div style="font-size:17px;font-weight:700;margin-top:8px;text-shadow:0 0 6px #00ff8c;">&gt; Prénom_Nom</div>
+        <div style="font-size:11px;color:#00ff8c;opacity:0.8;">// Développeur Full-Stack</div>
+        <div style="margin-top:10px;display:inline-block;border:1px solid #00ff8c;color:#00ff8c;padding:3px 8px;font-size:10px;box-shadow:0 0 8px rgba(0,255,140,0.5);">[ Voir mes projets ]</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Matrix Code</h3>
+      <p>Noir pur, vert phosphorescent, grille de "pluie" en fond léger, tout en monospace. Très codé, très geek assumé.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="neon-cyberpunk" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="position:relative;height:100%;background:linear-gradient(180deg,#0a0014,#1a0230);padding:14px;color:#fff;overflow:hidden;
+                  background-image:linear-gradient(180deg,#0a0014,#1a0230), repeating-linear-gradient(90deg, rgba(255,0,200,0.08) 0 1px, transparent 1px 24px), repeating-linear-gradient(0deg, rgba(0,240,255,0.08) 0 1px, transparent 1px 24px);">
+        <div class="cy-scanline"></div>
+        <div style="font-size:17px;font-weight:800;text-shadow:0 0 8px #ff00c8, 0 0 16px #00f0ff;animation:flicker 4s infinite;">PRÉNOM NOM</div>
+        <div style="font-size:11px;color:#00f0ff;text-shadow:0 0 6px #00f0ff;">DÉVELOPPEUR FULL-STACK</div>
+        <div style="margin-top:10px;display:inline-block;background:linear-gradient(90deg,#ff00c8,#00f0ff);color:#0a0014;padding:3px 10px;font-size:10px;font-weight:700;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);">VOIR MES PROJETS</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Neon Cyberpunk</h3>
+      <p>Fond violet profond, grille néon magenta/cyan, texte qui "glow", bords coupés façon HUD. Effet Blade Runner assumé.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="glitch-terminal" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="position:relative;height:100%;background:#050507;padding:14px;color:#e6e6e6;font-family:monospace;overflow:hidden;border:1px solid #1f2a24;">
+        <div style="font-size:10px;color:#00f0ff;">root@portfolio:~$</div>
+        <div style="font-size:16px;font-weight:700;margin-top:6px;position:relative;">
+          <span style="position:absolute;left:1px;top:0;color:#ff00c8;opacity:0.7;">Prénom Nom</span>
+          <span style="position:relative;">Prénom Nom</span>
+        </div>
+        <div style="font-size:11px;color:#7dffb3;">&gt; role: Full-Stack Developer_</div>
+        <div style="margin-top:10px;display:inline-block;background:#0d1210;border:1px solid #00ff8c;color:#00ff8c;padding:3px 8px;font-size:10px;">Voir mes projets ▸</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Glitch Terminal</h3>
+      <p>Terminal sombre sobre, texte avec léger effet glitch/split-RGB sur les titres au survol. Discret au repos, "punchy" sur l'interaction.</p>
+    </div>
+  </div>
+</div>
+
+<p class="label">Clique sur une carte, ou combine des éléments de plusieurs (dis-le en texte).</p>

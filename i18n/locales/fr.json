@@ -1,0 +1,137 @@
+{
+  "nav": { "about": "À propos", "skills": "Compétences", "projects": "Projets", "contact": "Contact" },
+  "header": { "brand": "Loïc Leclercq", "downloadCv": "Télécharger mon CV", "toggleMenu": "Ouvrir le menu" },
+  "theme": { "switchToLight": "Passer en mode clair", "switchToDark": "Passer en mode sombre" },
+  "hero": {
+    "greeting": "Loïc Leclercq",
+    "role": "Développeur Full-Stack junior — NestJS, Nuxt & TypeScript",
+    "ctaProjects": "Voir mes projets",
+    "ctaCv": "Télécharger mon CV"
+  },
+  "about": {
+    "title": "À propos",
+    "photoAlt": "Photo de Loïc Leclercq",
+    "intro": "Bonjour, je m'appelle Loïc. Après plusieurs années comme professeur d'éducation physique, puis opérateur dans une usine chimique, j'ai changé de vie pour le développement web — la logique de la résolution de problèmes, mais aussi l'idée de créer des outils qui simplifient vraiment le quotidien des gens. Ma formation m'a donné une base solide en full-stack, mais pas le design — un domaine qui m'intéresse aussi, et que j'apprends en plus de mon côté, sensible à ce qu'une interface soit vraiment soignée. L'IA fait partie de ma pratique, comme un outil qui accélère l'apprentissage et la production — jamais un substitut au développeur.",
+    "timeline": {
+      "studies": {
+        "title": "Brevet d'enseignement supérieur, Web Developer — EAFC Fléron-Charlemagne",
+        "description": "Formation d'adultes (promotion sociale) en développement web full-stack : PHP orienté objet, Laravel, Vue.js, bases de données relationnelles (MySQL). Diplôme obtenu avec la mention grande distinction."
+      },
+      "internship": {
+        "title": "Stage en développement full-stack — Keiro",
+        "description": "Stage chez Keiro (Grâce-Hollogne) : trois applications développées en full-stack (NestJS, Nuxt, TypeScript), sécurisées via Keycloak (SSO, gestion des rôles).",
+        "projects": {
+          "erp": {
+            "summary": "ERP interne pour la gestion des opérations de l'entreprise.",
+            "detail": "Application de gestion interne développée sur mesure pour les besoins opérationnels de Keiro."
+          },
+          "commande": {
+            "summary": "App de commande de repas entre entreprises et fournisseurs.",
+            "detail": "Permet au personnel de passer commande chez un traiteur/sandwicherie partenaire. Comptes utilisateur et admin par entreprise, et comptes fournisseur : chaque fournisseur définit son périmètre de livraison et l'heure limite de commande. Les utilisateurs commandent chez les fournisseurs à portée, avec un rappel automatique par email 30 minutes avant la deadline. Les commandes sont regroupées et envoyées aux fournisseurs, triées par société ; l'admin de l'entreprise voit qui a commandé, combien, et les retards."
+          },
+          "shelly": {
+            "summary": "App de pilotage de l'éclairage via des relais connectés Shelly.",
+            "detail": "Permet d'allumer, éteindre ou automatiser l'éclairage à distance via des relais connectés Shelly, pilotés depuis l'application."
+          }
+        },
+        "note": "Intégration d'outils d'IA (Claude Code, serveurs MCP, conception d'agents) au cycle de développement — une bonne partie de cette stack (NestJS, Nuxt, TypeScript) a ensuite servi de base à mon TFE."
+      },
+      "tfe": {
+        "title": "Travail de fin d'études — Questy",
+        "description": "Conception et développement d'une plateforme de gamification sportive : avatar RPG évolutif, activités physiques réelles et défis générés par IA, combats hebdomadaires en tournoi et classement mensuel."
+      }
+    }
+  },
+  "skills": {
+    "title": "Compétences",
+    "filterLabel": "Filtrer les compétences par catégorie",
+    "categories": {
+      "all": "Tous",
+      "languages": "Langages",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "databases": "Bases de données & ORM",
+      "auth": "Authentification",
+      "testing": "Tests",
+      "ai": "Intelligence artificielle",
+      "tools": "Outils",
+      "deployment": "Déploiement"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "othersLabel": "Autres projets",
+    "githubNote": "Plusieurs autres projets réalisés en cours de formation sont disponibles sur mon",
+    "githubNoteLink": "profil GitHub",
+    "demoSoon": "Démo bientôt disponible",
+    "viewDemo": "Voir la démo",
+    "viewDetails": "Voir le détail",
+    "back": "Retour aux projets",
+    "challengesTitle": "Défis techniques",
+    "tfeBadge": "TFE",
+    "toryu": {
+      "title": "Toryu",
+      "description": "Toryu est une plateforme sociale dédiée à la lecture et au partage de mangas amateurs : les créateurs publient leurs planches (upload, réordonnancement, classification), les lecteurs découvrent les œuvres par filtres (style, genre, culture), les évaluent, les rangent dans leur mangathèque ou leur pile de lecture, et gagnent une monnaie virtuelle en lisant. Messagerie privée, commentaires et système de modération complètent l'aspect communautaire. Projet multi-repo (NestJS, Nuxt 4, PostgreSQL, Docker) actuellement en développement.",
+      "context": "Toryu est un projet personnel en développement actif : une plateforme sociale de lecture et de partage de mangas amateurs, organisée en 3 dépôts indépendants (API NestJS, frontend Nuxt 4, orchestration Docker) reliés par une base PostgreSQL. Les créateurs publient leurs planches (upload vers S3, réordonnancement par glisser-déposer), les lecteurs les découvrent par filtres, les évaluent et gagnent une monnaie virtuelle en lisant. Une messagerie privée en temps réel (WebSockets) permet la mise en relation entre utilisateurs, complétée par un système de modération et de signalement.",
+      "challenges": [
+        "Architecture multi-repo orchestrée par Docker Compose (API, web, infra), avec validation stricte des variables d'environnement (Joi) au démarrage.",
+        "Messagerie privée en temps réel via WebSockets (Socket.io), avec filtrage automatique des données sensibles dans les messages.",
+        "Upload et stockage des planches de manga sur S3 (URLs présignées), avec réordonnancement par glisser-déposer côté frontend."
+      ]
+    },
+    "questy": {
+      "title": "Questy",
+      "description": "Plateforme de gamification sportive : un avatar RPG progresse via des activités physiques réelles et des défis générés par IA (Gemini), avec tournois hebdomadaires en combat au tour par tour et classement mensuel.",
+      "context": "Questy est mon travail de fin d'études (TFE) : une plateforme de gamification sportive où chaque utilisateur incarne un avatar RPG (force, agilité, endurance, intelligence, esprit, vitalité) qui progresse en accomplissant des activités physiques réelles et des défis générés par IA (quiz et énigmes via l'API Gemini). Les points gagnés font évoluer les statistiques et débloquent des éléments de personnalisation de l'avatar. Une fois par semaine, les joueurs s'affrontent en combat au tour par tour dans un tournoi, en plus d'un classement mensuel général. Le backend est développé en NestJS/TypeORM/PostgreSQL, le frontend en Nuxt 3/Vue 3/Pinia, avec un panel d'administration dédié.",
+      "challenges": [
+        "Authentification sécurisée par JWT et gestion des rôles (utilisateur / admin) avec Passport.",
+        "Système de progression RPG : 6 statistiques calculées dynamiquement à partir de l'XP gagnée sur les activités et les défis générés par IA (API Gemini), avec validation des réponses.",
+        "Moteur de combat au tour par tour pour les tournois hebdomadaires (dégâts, critiques, historique des tours) et classement mensuel modélisé avec TypeORM sur PostgreSQL."
+      ]
+    },
+    "rockpaperscissors": {
+      "title": "Pierre-Papier-Ciseaux",
+      "description": "Jeu Pierre-Papier-Ciseaux développé en Vue.js, avec gestion du score et animation des choix."
+    },
+    "contactlist": {
+      "title": "Contactlist",
+      "description": "Carnet de contacts développé en Vue.js : ajout, édition et suppression de contacts."
+    },
+    "extensions": {
+      "eyebrow": "Extensions navigateur",
+      "title": "À installer directement",
+      "kind": "Extension Chrome · Manifest V3",
+      "source": "Code source",
+      "download": "Télécharger",
+      "note": "Le téléchargement pointe vers le zip de la dernière release GitHub, à charger ensuite en mode développeur (chrome://extensions) — impossible d'installer en un clic hors Chrome Web Store."
+    },
+    "tablauncher": {
+      "title": "Tab Launcher",
+      "description": "Ouvre des groupes d'onglets pré-configurés en un clic, organisés par catégorie et sous-catégorie. Page d'options avec CRUD complet et export/import JSON."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Une question, une opportunité ? Écris-moi.",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "sending": "Envoi en cours...",
+    "success": "Message envoyé",
+    "error": "Une erreur est survenue, réessaie ou écris-moi directement :",
+    "fallbackEmail": "lleclercq91{'@'}outlook.com",
+    "fallbackLink": "lleclercq91{'@'}outlook.com",
+    "errors": {
+      "required": "Ce champ est requis",
+      "invalid": "Format invalide"
+    }
+  },
+  "footer": {
+    "rights": "© {year} Loïc Leclercq. Tous droits réservés."
+  },
+  "seo": {
+    "homeTitle": "Loïc Leclercq — Développeur Full-Stack",
+    "homeDescription": "Portfolio de Loïc Leclercq, développeur full-stack junior spécialisé en NestJS et Nuxt."
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "nav": { "about": "About", "skills": "Skills", "projects": "Projects", "contact": "Contact" },
+  "header": { "brand": "Loïc Leclercq", "downloadCv": "Download my CV", "toggleMenu": "Open menu" },
+  "theme": { "switchToLight": "Switch to light mode", "switchToDark": "Switch to dark mode" },
+  "hero": {
+    "greeting": "Loïc Leclercq",
+    "role": "Junior Full-Stack Developer — NestJS, Nuxt & TypeScript",
+    "ctaProjects": "See my projects",
+    "ctaCv": "Download my CV"
+  },
+  "about": {
+    "title": "About",
+    "photoAlt": "Photo of Loïc Leclercq",
+    "intro": "Hello, I'm Loïc. After several years as a physical education teacher, then as a factory operator in the chemical industry, I changed my life for web development — drawn by the logic of solving problems, but also by the idea of building tools that genuinely make people's everyday lives easier. My training gave me a solid full-stack foundation, but not design — a field I'm also drawn to, and one I'm learning on the side, since I'm genuinely sensitive to a well-crafted interface. AI is part of how I work — a tool that speeds up learning and production, never a substitute for the developer.",
+    "timeline": {
+      "studies": {
+        "title": "Higher Education Certificate, Web Developer — EAFC Fléron-Charlemagne",
+        "description": "Adult retraining program (Belgian \"promotion sociale\") in full-stack web development: object-oriented PHP, Laravel, Vue.js, relational databases (MySQL). Graduated with highest honors."
+      },
+      "internship": {
+        "title": "Full-stack development internship — Keiro",
+        "description": "Internship at Keiro (Grâce-Hollogne): three applications built full-stack (NestJS, Nuxt, TypeScript), secured with Keycloak (SSO, role management).",
+        "projects": {
+          "erp": {
+            "summary": "Internal ERP for managing the company's operations.",
+            "detail": "Internal management application built to Keiro's operational needs."
+          },
+          "commande": {
+            "summary": "Meal-ordering app connecting companies and suppliers.",
+            "detail": "Lets staff order from a partner caterer/sandwich shop. User and admin accounts per company, plus supplier accounts: each supplier defines its delivery area and order cut-off time. Users order from suppliers in range, with an automatic email reminder 30 minutes before the deadline. Orders are grouped and sent to suppliers, sorted by company; the company admin sees who ordered, how much, and any late orders."
+          },
+          "shelly": {
+            "summary": "Lighting-control app driving connected Shelly relays.",
+            "detail": "Turns lighting on/off or automates it remotely via connected Shelly relays, controlled from the app."
+          }
+        },
+        "note": "Integrated AI tools (Claude Code, MCP servers, agent design) into the development workflow — much of this stack (NestJS, Nuxt, TypeScript) later formed the base for my final year project."
+      },
+      "tfe": {
+        "title": "Final year project — Questy",
+        "description": "Design and development of a fitness-gamification platform: an evolving RPG avatar, real physical activities and AI-generated challenges, weekly tournament combat and monthly rankings."
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "filterLabel": "Filter skills by category",
+    "categories": {
+      "all": "All",
+      "languages": "Languages",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "databases": "Databases & ORM",
+      "auth": "Authentication",
+      "testing": "Testing",
+      "ai": "Artificial intelligence",
+      "tools": "Tools",
+      "deployment": "Deployment"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "othersLabel": "Other projects",
+    "githubNote": "Several other projects built during my training are available on my",
+    "githubNoteLink": "GitHub profile",
+    "demoSoon": "Demo coming soon",
+    "viewDemo": "View demo",
+    "viewDetails": "View details",
+    "back": "Back to projects",
+    "challengesTitle": "Technical challenges",
+    "tfeBadge": "Final year project",
+    "toryu": {
+      "title": "Toryu",
+      "description": "Toryu is a social platform dedicated to reading and sharing amateur manga: creators publish their pages (upload, reordering, categorization), readers discover works through filters (style, genre, culture), rate them, organize them in their personal library or reading list, and earn virtual currency by reading. Private messaging, comments and a moderation system round out the community features. Multi-repo project (NestJS, Nuxt 4, PostgreSQL, Docker) currently in development.",
+      "context": "Toryu is a personal project in active development: a social platform for reading and sharing amateur manga, organized as 3 independent repos (NestJS API, Nuxt 4 frontend, Docker orchestration) linked by a PostgreSQL database. Creators publish their pages (upload to S3, drag-and-drop reordering), readers discover them through filters, rate them and earn virtual currency by reading. Real-time private messaging (WebSockets) connects users, backed by a moderation and reporting system.",
+      "challenges": [
+        "Multi-repo architecture orchestrated with Docker Compose (API, web, infra), with strict environment variable validation (Joi) at startup.",
+        "Real-time private messaging via WebSockets (Socket.io), with automatic filtering of sensitive data in messages.",
+        "Manga page upload and storage on S3 (presigned URLs), with drag-and-drop reordering on the frontend."
+      ]
+    },
+    "questy": {
+      "title": "Questy",
+      "description": "A fitness-gamification platform: an RPG avatar progresses through real physical activities and AI-generated challenges (Gemini), with weekly turn-based combat tournaments and a monthly ranking.",
+      "context": "Questy is my final year project (Belgian \"TFE\"): a fitness-gamification platform where each user has an RPG avatar (strength, agility, endurance, intelligence, spirit, vitality) that levels up by completing real physical activities and AI-generated challenges (quizzes and riddles via the Gemini API). Points earned boost stats and unlock avatar customization items. Once a week, players face off in turn-based combat tournaments, alongside an overall monthly ranking. The backend is built with NestJS/TypeORM/PostgreSQL, the frontend with Nuxt 3/Vue 3/Pinia, with a dedicated admin panel.",
+      "challenges": [
+        "Secure JWT authentication and role management (user / admin) with Passport.",
+        "RPG progression system: 6 stats computed dynamically from XP earned on activities and AI-generated challenges (Gemini API), with answer validation.",
+        "Turn-based combat engine for weekly tournaments (damage, crits, turn history) and a monthly ranking system modeled with TypeORM on PostgreSQL."
+      ]
+    },
+    "rockpaperscissors": {
+      "title": "Rock-Paper-Scissors",
+      "description": "Rock-Paper-Scissors game built with Vue.js, with score tracking and animated choices."
+    },
+    "contactlist": {
+      "title": "Contactlist",
+      "description": "Contact book built with Vue.js: add, edit and delete contacts."
+    },
+    "extensions": {
+      "eyebrow": "Browser extensions",
+      "title": "Install directly",
+      "kind": "Chrome extension · Manifest V3",
+      "source": "Source code",
+      "download": "Download",
+      "note": "The download links to the zip attached to the latest GitHub release — load it in developer mode afterwards (chrome://extensions). One-click install isn't possible outside the Chrome Web Store."
+    },
+    "tablauncher": {
+      "title": "Tab Launcher",
+      "description": "Opens pre-configured tab groups in one click, organized by category and subcategory. Options page with full CRUD and JSON export/import."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "A question, an opportunity? Get in touch.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "success": "Message sent",
+    "error": "Something went wrong, try again or email me directly:",
+    "fallbackEmail": "lleclercq91{'@'}outlook.com",
+    "fallbackLink": "lleclercq91{'@'}outlook.com",
+    "errors": {
+      "required": "This field is required",
+      "invalid": "Invalid format"
+    }
+  },
+  "footer": {
+    "rights": "© {year} Loïc Leclercq. All rights reserved."
+  },
+  "seo": {
+    "homeTitle": "Loïc Leclercq — Full-Stack Developer",
+    "homeDescription": "Portfolio of Loïc Leclercq, junior full-stack developer specialized in NestJS and Nuxt."
+  }
+}
