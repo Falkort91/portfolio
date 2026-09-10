@@ -103,7 +103,7 @@
       "kind": "Chrome extension · Manifest V3",
       "source": "Source code",
       "download": "Download",
-      "note": "The download links to the zip attached to the latest GitHub release — load it in developer mode afterwards (chrome://extensions). One-click install isn't possible outside the Chrome Web Store."
+      "note": "Installed manually (no Chrome Web Store) — step-by-step instructions are in the project's README."
     },
     "tablauncher": {
       "title": "Tab Launcher",

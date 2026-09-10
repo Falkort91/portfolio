@@ -86,7 +86,7 @@ export default defineNuxtConfig({
         'simple-icons:docker', 'simple-icons:postman', 'simple-icons:figma',
         'simple-icons:microsoftoffice',
         'simple-icons:vercel', 'simple-icons:railway', 'simple-icons:linkedin',
-        'simple-icons:socketdotio', 'simple-icons:amazons3',
+        'simple-icons:socketdotio', 'simple-icons:amazons3', 'simple-icons:googlechrome',
         'heroicons:sun', 'heroicons:moon', 'heroicons:bars-3', 'heroicons:x-mark',
         'heroicons:academic-cap', 'heroicons:briefcase', 'heroicons:rocket-launch',
         'heroicons:chevron-right',
