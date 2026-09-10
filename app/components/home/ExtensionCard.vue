@@ -22,7 +22,7 @@ const title = computed(() => t(`projects.${props.project.slug}.title`))
     </p>
 
     <div class="mt-3 flex flex-wrap gap-2">
-      <Icon v-for="icon in project.stack" :key="icon" :name="icon" class="h-4 w-4 text-text-muted" />
+      <StackIcon v-for="icon in project.stack" :key="icon" :name="icon" class="h-4 w-4 text-text-muted" />
     </div>
 
     <div class="mt-4 flex gap-2 text-xs font-semibold">

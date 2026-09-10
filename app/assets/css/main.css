@@ -120,6 +120,135 @@ body {
   }
 }
 
+/* Icônes de stack technique (projets) : glitch chromatique façon "parasites écran"
+   (clip-path déchiré + aberration chromatique en drop-shadow, text-shadow ne
+   s'appliquant pas à un SVG), déclenché au hasard par useIconGlitch. La couleur de
+   marque (--icon-brand-color, posée par StackIcon.vue) n'est PAS gérée par une
+   transition séparée : c'est l'animation ci-dessous qui la fait varier à chaque
+   étape, pour que la perte de couleur soit synchronisée avec chaque sursaut. */
+.stack-icon {
+  color: rgb(var(--color-text-muted));
+}
+
+/* Durée alignée sur GLITCH_DURATION_MS (useIconGlitch.ts). Trois sursauts de sortie
+   (58→68%, 76→82%, 88→92%) dont l'écart se resserre à chaque fois, puis un dernier
+   battement très rapide (95→100%) — comme si ça s'essoufflait : le premier sursaut
+   est lent et posé, le dernier est bref et haletant avant de lâcher. */
+.stack-icon--glitching {
+  animation: icon-glitch 1.3s ease-in-out;
+}
+
+@keyframes icon-glitch {
+  0%,
+  6% {
+    clip-path: inset(0 0 55% 0);
+    color: rgb(var(--color-text-muted));
+    filter: drop-shadow(3px 0 rgb(var(--color-accent-magenta))) drop-shadow(-3px 0 rgb(var(--color-accent-cyan)))
+      brightness(1.4);
+    transform: translateX(3px);
+    opacity: 0.5;
+  }
+  12% {
+    clip-path: inset(65% 0 0 0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: drop-shadow(-3px 0 rgb(var(--color-accent-magenta))) drop-shadow(3px 0 rgb(var(--color-accent-cyan)))
+      brightness(1.4);
+    transform: translateX(-3px);
+    opacity: 1;
+  }
+  18% {
+    clip-path: inset(20% 0 30% 0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: drop-shadow(3px 0 rgb(var(--color-accent-magenta))) drop-shadow(-3px 0 rgb(var(--color-accent-cyan)))
+      brightness(1.4);
+    transform: translateX(2px);
+    opacity: 0.65;
+  }
+  24%,
+  50% {
+    clip-path: inset(0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: brightness(1.15);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  /* Premier sursaut — lent, encore une bonne résistance. */
+  60% {
+    clip-path: inset(0 0 40% 0);
+    color: rgb(var(--color-text-muted));
+    filter: drop-shadow(-3px 0 rgb(var(--color-accent-magenta))) drop-shadow(3px 0 rgb(var(--color-accent-cyan)))
+      brightness(1.3);
+    transform: translateX(-2px);
+    opacity: 0.6;
+  }
+  68% {
+    clip-path: inset(0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: brightness(1.1);
+    transform: translateX(0);
+    opacity: 0.95;
+  }
+  /* Deuxième sursaut — plus rapproché, récupération moins nette. */
+  76% {
+    clip-path: inset(45% 0 0 0);
+    color: rgb(var(--color-text-muted));
+    filter: drop-shadow(3px 0 rgb(var(--color-accent-magenta))) drop-shadow(-3px 0 rgb(var(--color-accent-cyan)))
+      brightness(1.25);
+    transform: translateX(2px);
+    opacity: 0.45;
+  }
+  82% {
+    clip-path: inset(0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: brightness(1);
+    transform: translateX(0);
+    opacity: 0.85;
+  }
+  /* Troisième sursaut — encore plus rapproché, la résistance s'épuise. */
+  88% {
+    clip-path: inset(0 0 55% 0);
+    color: rgb(var(--color-text-muted));
+    filter: drop-shadow(-3px 0 rgb(var(--color-accent-magenta))) drop-shadow(3px 0 rgb(var(--color-accent-cyan)));
+    transform: translateX(-2px);
+    opacity: 0.35;
+  }
+  92% {
+    clip-path: inset(0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: none;
+    transform: translateX(0);
+    opacity: 0.6;
+  }
+  /* Battement final, haletant — très rapide, puis lâche. */
+  95% {
+    clip-path: inset(60% 0 0 0);
+    color: rgb(var(--color-text-muted));
+    filter: drop-shadow(2px 0 rgb(var(--color-accent-magenta))) drop-shadow(-2px 0 rgb(var(--color-accent-cyan)));
+    transform: translateX(1px);
+    opacity: 0.3;
+  }
+  98% {
+    clip-path: inset(0);
+    color: var(--icon-brand-color, rgb(var(--color-text-muted)));
+    filter: none;
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  100% {
+    clip-path: inset(0);
+    color: rgb(var(--color-text-muted));
+    filter: none;
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-icon--glitching {
+    animation: none;
+  }
+}
+
 .dark .scanline-bg {
   position: relative;
   overflow: hidden;

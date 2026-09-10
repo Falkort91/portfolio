@@ -52,7 +52,7 @@ const hasImage = computed(() => props.project.images.length > 0)
       <p class="mt-3 line-clamp-3 text-text-muted">{{ t(`projects.${project.slug}.description`) }}</p>
 
       <div class="mt-4 flex flex-wrap gap-2">
-        <Icon v-for="icon in project.stack" :key="icon" :name="icon" class="h-5 w-5 text-text-muted" />
+        <StackIcon v-for="icon in project.stack" :key="icon" :name="icon" class="h-5 w-5 text-text-muted" />
       </div>
 
       <div class="mt-6 flex flex-wrap items-center gap-4">

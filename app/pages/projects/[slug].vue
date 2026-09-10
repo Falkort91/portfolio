@@ -61,7 +61,7 @@ useSeoMeta({
     <p class="mt-6 text-text-muted">{{ t(`projects.${slug}.context`) }}</p>
 
     <div class="mt-6 flex flex-wrap gap-3">
-      <Icon v-for="icon in featuredProject.stack" :key="icon" :name="icon" class="h-6 w-6 text-text-muted" />
+      <StackIcon v-for="icon in featuredProject.stack" :key="icon" :name="icon" class="h-6 w-6 text-text-muted" />
     </div>
 
     <div v-if="featuredProject.images.length" class="mt-10 grid gap-4 sm:grid-cols-2">

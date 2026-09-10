@@ -50,7 +50,7 @@ useSectionActive('projects', pulseTitleGlitch)
           />
         </div>
 
-        <p data-reveal class="mt-6 text-sm text-text-muted">
+        <p data-reveal class="mt-6 text-center text-sm text-text-muted">
           {{ t('projects.githubNote') }}
           <a :href="githubUrl" target="_blank" rel="noopener noreferrer" class="underline">{{ t('projects.githubNoteLink') }}</a>.
         </p>
