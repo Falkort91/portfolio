@@ -6,7 +6,8 @@
     "greeting": "Loïc Leclercq",
     "role": "Développeur Full-Stack junior — NestJS, Nuxt & TypeScript",
     "ctaProjects": "Voir mes projets",
-    "ctaCv": "Télécharger mon CV"
+    "ctaCv": "Télécharger mon CV",
+    "scrollHint": "Défiler vers le bas"
   },
   "about": {
     "title": "À propos",

@@ -89,7 +89,7 @@ export default defineNuxtConfig({
         'simple-icons:socketdotio', 'simple-icons:amazons3', 'simple-icons:googlechrome',
         'heroicons:sun', 'heroicons:moon', 'heroicons:bars-3', 'heroicons:x-mark',
         'heroicons:academic-cap', 'heroicons:briefcase', 'heroicons:rocket-launch',
-        'heroicons:chevron-right',
+        'heroicons:chevron-right', 'heroicons:chevron-down',
         'heroicons:code-bracket', 'heroicons:bolt',
       ],
       scan: true,

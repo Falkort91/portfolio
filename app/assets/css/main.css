@@ -398,12 +398,31 @@ summary::-webkit-details-marker {
   50% { opacity: 0; }
 }
 
+/* Flèche d'invite au scroll, sous le Hero — n'apparaît (v-if) qu'une fois l'animation
+   de frappe du nom terminée, avec un fondu d'entrée puis un clignotement doux en
+   continu pour attirer l'œil sans être agressif. */
+.scroll-hint {
+  animation: scroll-hint-blink 1.8s ease-in-out infinite;
+}
+@keyframes scroll-hint-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.fade-enter-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .glitch-hover:hover,
   .glitch-hover.auto-glitch,
   .terminal-cursor::after,
   .scanline-flicker::after,
   .chevron-hint,
+  .scroll-hint,
   .icon-spin {
     animation: none;
   }

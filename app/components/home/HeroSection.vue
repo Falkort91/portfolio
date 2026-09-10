@@ -2,7 +2,7 @@
 import { useSectionActive } from '~/composables/useSectionActive'
 
 const { t, locale } = useI18n()
-const { displayedText, start } = useTypewriter({ speed: 55 })
+const { displayedText, isDone, start } = useTypewriter({ speed: 55 })
 const sectionRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
@@ -20,7 +20,11 @@ useSectionActive('top', () => start(t('hero.greeting')))
 </script>
 
 <template>
-  <section id="top" ref="sectionRef" class="scanline-bg flex min-h-screen flex-col justify-center px-4 pt-16 sm:px-6 lg:px-8">
+  <section
+    id="top"
+    ref="sectionRef"
+    class="scanline-bg relative flex min-h-[calc(100vh-4rem)] flex-col justify-center px-4 pt-16 sm:px-6 lg:px-8"
+  >
     <div class="mx-auto w-full max-w-3xl">
       <p class="text-sm text-accent-green">$ whoami</p>
       <h1 class="mt-2 text-3xl font-bold sm:text-4xl md:text-5xl">
@@ -43,5 +47,16 @@ useSectionActive('top', () => start(t('hero.greeting')))
         </a>
       </div>
     </div>
+
+    <Transition name="fade">
+      <a
+        v-if="isDone"
+        href="#about"
+        :aria-label="t('hero.scrollHint')"
+        class="scroll-hint absolute bottom-8 left-1/2 -translate-x-1/2 text-accent-green"
+      >
+        <Icon name="heroicons:chevron-down" class="h-7 w-7" />
+      </a>
+    </Transition>
   </section>
 </template>
