@@ -70,6 +70,7 @@
     "back": "Back to projects",
     "challengesTitle": "Technical challenges",
     "tfeBadge": "Final year project",
+    "lightboxClose": "Close enlarged preview",
     "toryu": {
       "title": "Toryu",
       "description": "Toryu is a social platform dedicated to reading and sharing amateur manga: creators publish their pages (upload, reordering, categorization), readers discover works through filters (style, genre, culture), rate them, organize them in their personal library or reading list, and earn virtual currency by reading. Private messaging, comments and a moderation system round out the community features. Multi-repo project (NestJS, Nuxt 4, PostgreSQL, Docker) currently in development.",
@@ -78,16 +79,36 @@
         "Multi-repo architecture orchestrated with Docker Compose (API, web, infra), with strict environment variable validation (Joi) at startup.",
         "Real-time private messaging via WebSockets (Socket.io), with automatic filtering of sensitive data in messages.",
         "Manga page upload and storage on S3 (presigned URLs), with drag-and-drop reordering on the frontend."
+      ],
+      "showcase": [
+        "Search combines a text field (title, author) with stackable filters — type, audience, genres, status — updating results instantly, grouped by category (manga, comics, manhwa/webtoon).",
+        "A work's page shows its rating, genres and publication status. Every work can be liked with several reactions (like, love, passion) and commented on by the community, with threaded replies — the page also links to the creator's public profile.",
+        "Reading opens in a dedicated viewer with page-by-page navigation, a chapter selector, and automatic advance to the next chapter.",
+        "The dashboard centralizes access to the creation studio, favorites and received collaboration requests. The reading pile lists set-aside works, each with its rating and a quick report action.",
+        "In the studio, plates dropped into the film reel are dragged into a chapter to be organized before publishing.",
+        "Private messaging enables a real-time exchange with another user — here a bug report sent directly to the team — with a conversation list giving a preview of the latest message exchanged."
       ]
     },
     "questy": {
       "title": "Questy",
       "description": "A fitness-gamification platform: an RPG avatar progresses through real physical activities and AI-generated challenges (Gemini), with weekly turn-based combat tournaments and a monthly ranking.",
-      "context": "Questy is my final year project (Belgian \"TFE\"): a fitness-gamification platform where each user has an RPG avatar (strength, agility, endurance, intelligence, spirit, vitality) that levels up by completing real physical activities and AI-generated challenges (quizzes and riddles via the Gemini API). Points earned boost stats and unlock avatar customization items. Once a week, players face off in turn-based combat tournaments, alongside an overall monthly ranking. The backend is built with NestJS/TypeORM/PostgreSQL, the frontend with Nuxt 3/Vue 3/Pinia, with a dedicated admin panel.",
+      "context": "Questy is my final year project (Belgian \"TFE\"): a fitness-gamification platform where each user has an RPG avatar (strength, agility, endurance, intelligence, spirit, vitality) that levels up by completing real physical activities and AI-generated challenges (quizzes and riddles via the Gemini API). The starting idea: turn physical effort — often hard to keep up over time — into concrete, rewarding progression, the way an RPG does. Points earned boost stats and unlock avatar customization items. Once a week, players face off in turn-based combat tournaments, alongside an overall monthly ranking that keeps the competition going over the long run. The backend is built with NestJS/TypeORM/PostgreSQL, the frontend with Nuxt 3/Vue 3/Pinia, with JWT authentication, role management, a dedicated admin panel for content moderation, and a unit test suite (Jest) covering critical services.",
       "challenges": [
-        "Secure JWT authentication and role management (user / admin) with Passport.",
-        "RPG progression system: 6 stats computed dynamically from XP earned on activities and AI-generated challenges (Gemini API), with answer validation.",
-        "Turn-based combat engine for weekly tournaments (damage, crits, turn history) and a monthly ranking system modeled with TypeORM on PostgreSQL."
+        "Secure JWT authentication and role management (user / admin) with Passport, with protected API routes and a dedicated guard for the admin panel.",
+        "RPG progression system: 6 stats computed dynamically from XP earned on physical activities and AI-generated challenges (Gemini API), with automatic answer validation and error handling for the external API.",
+        "Turn-based combat engine for weekly tournaments (damage, crits, physical/magic blocking, turn history) and a monthly ranking system modeled with TypeORM on PostgreSQL, including end-of-month rank computation.",
+        "Unit test suite (Jest) covering critical backend services — character progression, combat engine, authentication — to keep future changes to the business logic safe."
+      ],
+      "showcase": [
+        "The inn acts as a central hub: level, hit points and hero stats are all visible at a glance right after logging in. It's the gateway to every feature — activities, challenges, tournament and profile.",
+        "The character progresses through 6 stats — strength, agility, endurance, intelligence, spirit, vitality — computed dynamically from XP earned in-game. Each stat directly affects combat: damage, crit chance or blocking.",
+        "The profile also lets players customize their avatar's appearance: body type, skin tone, hairstyle, hair color and helmet display, with a live preview of the character.",
+        "Every real physical activity logged (type, duration, intensity) grants XP and hit points, with a live preview of the rewards before validation. The system turns regular exercise directly into character progression.",
+        "Daily challenges generated by the Gemini API (quizzes, riddles) offer a second progression path, with automatic answer validation. Each completed challenge grants a stat point of the player's choice, up to a monthly cap.",
+        "Each week, a turn-based fight pits players against each other in a tournament: physical or magic attacks, blocking, and real-time damage and crit calculations. The outcome depends directly on the stats the player has built up.",
+        "Weekly fights build up a monthly rank (Bronze, Silver...), computed from cumulative wins and losses. Each win grants rank points, each loss costs a bit less.",
+        "A general monthly leaderboard ranks every player by cumulative points across all fights. It gives an overview of everyone's progress beyond the tournament rank alone.",
+        "The profile keeps a history of recent activities and lets players manage their personal information. A simple space to track recent progress and adjust account settings."
       ]
     },
     "rockpaperscissors": {

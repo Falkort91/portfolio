@@ -8,7 +8,6 @@ const { t } = useI18n()
 const title = computed(() => t(`projects.${props.project.slug}.title`))
 const mark = computed(() => title.value.slice(0, 2))
 const isAlt = computed(() => props.index % 2 === 1)
-const hasImage = computed(() => props.project.images.length > 0)
 </script>
 
 <template>
@@ -17,7 +16,7 @@ const hasImage = computed(() => props.project.images.length > 0)
       class="project-visual relative flex min-h-48 items-center justify-center overflow-hidden"
       :class="{ 'sm:order-2': isAlt }"
     >
-      <img v-if="hasImage" :src="project.images[0]" :alt="title" class="relative z-[1] h-full w-full object-cover" >
+      <img v-if="project.heroImage" :src="project.heroImage" :alt="title" class="relative z-[1] h-full w-full object-cover" >
       <span v-else class="relative z-[1] text-5xl font-extrabold tracking-tight text-text/90">{{ mark }}</span>
     </div>
 
@@ -32,6 +31,21 @@ const hasImage = computed(() => props.project.images.length > 0)
             {{ t('projects.tfeBadge') }}
           </span>
         </div>
+        <NuxtLink
+          :to="`/projects/${project.slug}`"
+          class="glitch-hover text-sm font-semibold text-accent-cyan"
+        >
+          {{ t('projects.viewDetails') }} →
+        </NuxtLink>
+      </div>
+
+      <p class="mt-3 line-clamp-3 text-text-muted">{{ t(`projects.${project.slug}.description`) }}</p>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        <StackIcon v-for="icon in project.stack" :key="icon" :name="icon" class="h-5 w-5 text-text-muted" />
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
         <span
           v-if="!project.demoUrl"
           class="rounded border border-accent-magenta px-2 py-1 text-xs font-semibold uppercase text-accent-magenta"
@@ -47,21 +61,6 @@ const hasImage = computed(() => props.project.images.length > 0)
         >
           {{ t('projects.viewDemo') }}
         </a>
-      </div>
-
-      <p class="mt-3 line-clamp-3 text-text-muted">{{ t(`projects.${project.slug}.description`) }}</p>
-
-      <div class="mt-4 flex flex-wrap gap-2">
-        <StackIcon v-for="icon in project.stack" :key="icon" :name="icon" class="h-5 w-5 text-text-muted" />
-      </div>
-
-      <div class="mt-6 flex flex-wrap items-center gap-4">
-        <NuxtLink
-          :to="`/projects/${project.slug}`"
-          class="glitch-hover text-sm font-semibold text-accent-cyan"
-        >
-          {{ t('projects.viewDetails') }} →
-        </NuxtLink>
         <a
           v-for="repo in project.repoUrls"
           :key="repo.url"

@@ -9,7 +9,8 @@ Ce fichier liste tout ce que le plan d'implémentation a volontairement laissé 
 
 ## Données (`app/data/`)
 
-- `app/data/projects.ts` : `featuredProjects[].images` est vide pour Toryu — une fois des captures d'écran déposées dans `public/images/projects/toryu/`, ajouter leurs chemins ici. Questy a désormais `hero.png`.
+- `app/data/projects.ts` : `featuredProjects[].images` est vide pour Toryu — une fois des captures d'écran déposées dans `public/images/projects/toryu/`, ajouter leurs chemins ici. Questy a désormais son set complet (hero, dashboard, profil, activités, classement).
+- `app/data/projects.ts` : nouveau champ optionnel `videos` (tableau `{ webm, mp4 }`, boucles silencieuses courtes) pour illustrer des interactions. La première vidéo remplace le hero statique sur la carte ; toutes s'ajoutent en tête de galerie sur la page détail. Questy a `fight` (combat tour par tour) et `quizz` (défi IA). Toryu n'en a pas encore.
 - `app/data/projects.ts` : `demoUrl` reste `null` pour Toryu (projet en développement, pas encore de démo). Questy est réhébergé et a désormais son `demoUrl` renseigné.
 - `app/data/projects.ts` : `featuredProjects[0]` (Toryu) a `repoUrls: []` — repos privés tant que le projet est en développement. À remplir si les repos passent publics.
 

@@ -1,10 +1,34 @@
+export interface ProjectVideo {
+  // webm en premier (plus léger) avec repli mp4 pour la compatibilité navigateur.
+  webm: string
+  mp4: string
+}
+
+export type ShowcaseItem =
+  | { type: 'image'; src: string }
+  // Plusieurs images sous une légende commune : pour regrouper des captures qui
+  // illustrent le même sujet (ex. une fiche découpée en plusieurs screenshots)
+  // sans qu'elles n'apparaissent comme des sujets distincts. `layout` détermine
+  // l'agencement selon le format des images : 'stack' (par défaut) empile des
+  // captures larges, 'row' met côte à côte des captures étroites/verticales.
+  | { type: 'images'; srcs: string[]; layout?: 'stack' | 'row' }
+  | { type: 'video'; video: ProjectVideo }
+
 export interface FeaturedProject {
   slug: string
   demoUrl: string | null
   isTfe: boolean
   repoUrls: { label: string; url: string }[]
   stack: string[]
-  images: string[]
+  // Bannière pleine largeur en tête de card et de page détail — représente l'app.
+  heroImage: string | null
+  // Images/vidéos de la page détail, dans l'ordre de présentation. Chaque entrée est légendée
+  // via i18n (`projects.{slug}.showcase[i]`, même index).
+  showcase: ShowcaseItem[]
+  // Format dominant des captures du showcase : 'portrait' (mobile, ex. Questy) garde le
+  // gabarit à largeur fixe réduite ; 'landscape' (desktop, ex. Toryu) utilise un gabarit à
+  // hauteur max pour éviter d'écraser des captures larges.
+  mediaFormat: 'portrait' | 'landscape'
 }
 
 export interface CompactProject {
@@ -40,7 +64,51 @@ export const featuredProjects: FeaturedProject[] = [
       'simple-icons:amazons3',
       'simple-icons:docker',
     ],
-    images: ['/images/projects/toryu/hero.png'],
+    heroImage: '/images/projects/toryu/hero.png',
+    mediaFormat: 'landscape',
+    // Ordre narratif : découverte → fiche œuvre (3 captures groupées) → lecture →
+    // profil (2 captures groupées) → studio → messagerie (2 captures groupées).
+    // Légendes correspondantes dans i18n `projects.toryu.showcase`.
+    showcase: [
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/toryu/explorer.webm',
+          mp4: '/videos/projects/toryu/explorer.mp4',
+        },
+      },
+      {
+        type: 'images',
+        srcs: [
+          '/images/projects/toryu/detail-oeuvre1.png',
+          '/images/projects/toryu/detail-oeuvre2.png',
+          '/images/projects/toryu/detail-oeuvre3.png',
+        ],
+      },
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/toryu/reading.webm',
+          mp4: '/videos/projects/toryu/reading.mp4',
+        },
+      },
+      {
+        type: 'images',
+        srcs: ['/images/projects/toryu/profil-1.png', '/images/projects/toryu/profil-2.png'],
+      },
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/toryu/studio.webm',
+          mp4: '/videos/projects/toryu/studio.mp4',
+        },
+      },
+      {
+        type: 'images',
+        srcs: ['/images/projects/toryu/messagerie1.png', '/images/projects/toryu/messagerie2.png'],
+        layout: 'row',
+      },
+    ],
   },
   {
     slug: 'questy',
@@ -61,7 +129,39 @@ export const featuredProjects: FeaturedProject[] = [
       'simple-icons:docker',
       'simple-icons:jest',
     ],
-    images: ['/images/projects/questy/hero.png'],
+    heroImage: '/images/projects/questy/hero.png',
+    mediaFormat: 'portrait',
+    // Ordre narratif : hub → progression du perso → activités réelles → défis IA → combat →
+    // classements → historique/profil. Légendes correspondantes dans i18n `projects.questy.showcase`.
+    showcase: [
+      { type: 'image', src: '/images/projects/questy/dashboard.png' },
+      { type: 'image', src: '/images/projects/questy/profil-1.png' },
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/questy/customization.webm',
+          mp4: '/videos/projects/questy/customization.mp4',
+        },
+      },
+      { type: 'image', src: '/images/projects/questy/activities.png' },
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/questy/quizz.webm',
+          mp4: '/videos/projects/questy/quizz.mp4',
+        },
+      },
+      {
+        type: 'video',
+        video: {
+          webm: '/videos/projects/questy/fight.webm',
+          mp4: '/videos/projects/questy/fight.mp4',
+        },
+      },
+      { type: 'image', src: '/images/projects/questy/ranking-1.png' },
+      { type: 'image', src: '/images/projects/questy/ranking-2.png' },
+      { type: 'image', src: '/images/projects/questy/profil-2.png' },
+    ],
   },
 ]
 

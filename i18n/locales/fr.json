@@ -65,11 +65,12 @@
     "githubNote": "Plusieurs autres projets réalisés en cours de formation sont disponibles sur mon",
     "githubNoteLink": "profil GitHub",
     "demoSoon": "Démo bientôt disponible",
-    "viewDemo": "Voir la démo",
+    "viewDemo": "Tester la démo",
     "viewDetails": "Voir le détail",
     "back": "Retour aux projets",
     "challengesTitle": "Défis techniques",
     "tfeBadge": "TFE",
+    "lightboxClose": "Fermer l'aperçu agrandi",
     "toryu": {
       "title": "Toryu",
       "description": "Toryu est une plateforme sociale dédiée à la lecture et au partage de mangas amateurs : les créateurs publient leurs planches (upload, réordonnancement, classification), les lecteurs découvrent les œuvres par filtres (style, genre, culture), les évaluent, les rangent dans leur mangathèque ou leur pile de lecture, et gagnent une monnaie virtuelle en lisant. Messagerie privée, commentaires et système de modération complètent l'aspect communautaire. Projet multi-repo (NestJS, Nuxt 4, PostgreSQL, Docker) actuellement en développement.",
@@ -78,16 +79,36 @@
         "Architecture multi-repo orchestrée par Docker Compose (API, web, infra), avec validation stricte des variables d'environnement (Joi) au démarrage.",
         "Messagerie privée en temps réel via WebSockets (Socket.io), avec filtrage automatique des données sensibles dans les messages.",
         "Upload et stockage des planches de manga sur S3 (URLs présignées), avec réordonnancement par glisser-déposer côté frontend."
+      ],
+      "showcase": [
+        "La recherche combine un champ texte (titre, auteur) et des filtres cumulables — type, public, genres, statut — avec mise à jour instantanée des résultats, organisés par catégorie (manga, comics, manhwa/webtoon).",
+        "La fiche d'une œuvre affiche sa note, ses genres et son statut de publication. Chaque œuvre peut être likée avec plusieurs réactions (like, adore, passion) et commentée par la communauté, avec réponses en fil de discussion — la fiche renvoie aussi vers le profil public du créateur.",
+        "La lecture s'ouvre dans une visionneuse dédiée avec navigation page par page, sélecteur de chapitre et passage automatique au chapitre suivant en fin de lecture.",
+        "Le tableau de bord centralise l'accès au studio de création, aux favoris et aux candidatures de collaboration reçues. La pile de lecture liste les œuvres mises de côté, chacune avec sa note et un accès rapide au signalement.",
+        "Dans le studio, les planches déposées dans la pellicule se glissent-déposent vers un chapitre pour être organisées avant publication.",
+        "La messagerie privée permet un échange en temps réel avec un autre utilisateur — ici un signalement de bug remonté directement à l'équipe — avec une liste de conversations donnant un aperçu du dernier message échangé."
       ]
     },
     "questy": {
       "title": "Questy",
       "description": "Plateforme de gamification sportive : un avatar RPG progresse via des activités physiques réelles et des défis générés par IA (Gemini), avec tournois hebdomadaires en combat au tour par tour et classement mensuel.",
-      "context": "Questy est mon travail de fin d'études (TFE) : une plateforme de gamification sportive où chaque utilisateur incarne un avatar RPG (force, agilité, endurance, intelligence, esprit, vitalité) qui progresse en accomplissant des activités physiques réelles et des défis générés par IA (quiz et énigmes via l'API Gemini). Les points gagnés font évoluer les statistiques et débloquent des éléments de personnalisation de l'avatar. Une fois par semaine, les joueurs s'affrontent en combat au tour par tour dans un tournoi, en plus d'un classement mensuel général. Le backend est développé en NestJS/TypeORM/PostgreSQL, le frontend en Nuxt 3/Vue 3/Pinia, avec un panel d'administration dédié.",
+      "context": "Questy est mon travail de fin d'études (TFE) : une plateforme de gamification sportive où chaque utilisateur incarne un avatar RPG (force, agilité, endurance, intelligence, esprit, vitalité) qui progresse en accomplissant des activités physiques réelles et des défis générés par IA (quiz et énigmes via l'API Gemini). L'idée de départ : transformer l'effort physique, souvent difficile à maintenir dans la durée, en une progression concrète et gratifiante, comme dans un jeu de rôle. Les points gagnés font évoluer les statistiques et débloquent des éléments de personnalisation de l'avatar. Une fois par semaine, les joueurs s'affrontent en combat au tour par tour dans un tournoi, en plus d'un classement mensuel général qui entretient une émulation sur la durée. Le backend est développé en NestJS/TypeORM/PostgreSQL, le frontend en Nuxt 3/Vue 3/Pinia, avec authentification JWT, gestion des rôles, un panel d'administration dédié à la modération des contenus, et une suite de tests unitaires (Jest) sur les services critiques.",
       "challenges": [
-        "Authentification sécurisée par JWT et gestion des rôles (utilisateur / admin) avec Passport.",
-        "Système de progression RPG : 6 statistiques calculées dynamiquement à partir de l'XP gagnée sur les activités et les défis générés par IA (API Gemini), avec validation des réponses.",
-        "Moteur de combat au tour par tour pour les tournois hebdomadaires (dégâts, critiques, historique des tours) et classement mensuel modélisé avec TypeORM sur PostgreSQL."
+        "Authentification sécurisée par JWT et gestion des rôles (utilisateur / admin) avec Passport, avec protection des routes sensibles côté API et un guard dédié pour le panel d'administration.",
+        "Système de progression RPG : 6 statistiques calculées dynamiquement à partir de l'XP gagnée sur les activités physiques et les défis générés par IA (API Gemini), avec validation automatique des réponses et gestion des cas d'erreur de l'API externe.",
+        "Moteur de combat au tour par tour pour les tournois hebdomadaires (dégâts, critiques, blocage physique/magique, historique des tours) et classement mensuel modélisé avec TypeORM sur PostgreSQL, incluant le calcul du rang de fin de mois.",
+        "Suite de tests unitaires (Jest) sur les services critiques du backend — progression du personnage, moteur de combat, authentification — pour sécuriser les évolutions futures de la logique métier."
+      ],
+      "showcase": [
+        "L'auberge sert de hub central : niveau, points de vie et statistiques du héros sont visibles en un coup d'œil dès la connexion. C'est le point de passage entre toutes les fonctionnalités : activités, défis, tournoi et profil.",
+        "Le personnage progresse via 6 statistiques — force, agilité, endurance, intelligence, esprit, vitalité — calculées dynamiquement à partir de l'XP gagnée en jeu. Chaque statistique influence directement le combat : dégâts, chances de critique ou blocage.",
+        "Le profil permet aussi de personnaliser l'apparence de l'avatar : silhouette, teinte de peau, coiffure, couleur de cheveux et affichage du casque, avec un aperçu du personnage en temps réel.",
+        "Chaque activité physique réelle déclarée (type, durée, intensité) rapporte de l'XP et des points de vie, avec un aperçu des gains avant validation. Le système encourage une pratique sportive régulière en la transformant directement en progression du personnage.",
+        "Des défis quotidiens générés par l'API Gemini (quiz, énigmes) offrent une deuxième source de progression, avec validation automatique des réponses. Chaque défi complété fait gagner un point de statistique au choix, jusqu'à une limite mensuelle.",
+        "Chaque semaine, un combat au tour par tour oppose les joueurs dans un tournoi : attaque physique ou magique, blocage, et calcul des dégâts et critiques en temps réel. L'issue du combat dépend directement des statistiques développées par le joueur.",
+        "Les combats hebdomadaires font progresser un rang mensuel (Bronze, Argent...), calculé sur les victoires et défaites cumulées. Chaque victoire rapporte des points de rang, chaque défaite en coûte un peu moins.",
+        "Un classement mensuel général confronte tous les joueurs sur leurs points cumulés, tous combats confondus. Il offre une vue d'ensemble de la progression de chacun, au-delà du seul rang de tournoi.",
+        "Le profil garde un historique des dernières activités et permet de gérer ses informations personnelles. Un espace simple pour suivre sa progression récente et ajuster son compte."
       ]
     },
     "rockpaperscissors": {
