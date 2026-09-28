@@ -5,7 +5,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <aside data-reveal class="rounded-lg border border-border bg-bg-alt/50 p-5">
+  <aside class="rounded-lg border border-border bg-bg-alt/50 p-5">
     <p class="text-xs font-bold uppercase tracking-wide text-accent-green">
       {{ t('projects.extensions.eyebrow') }}
     </p>

@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { skillCategories } from '~/data/skills'
-import { useDissolveEnabled } from '~/composables/useDissolveEnabled'
 import { useScramble } from '~/composables/useScramble'
 import { useSectionActive } from '~/composables/useSectionActive'
 import { useTitleGlitch } from '~/composables/useTitleGlitch'
 
 const { t } = useI18n()
-const sectionRef = ref<HTMLElement | null>(null)
-const { enabled: dissolveEnabled } = useDissolveEnabled()
-const sectionReady = computed(() => !dissolveEnabled.value)
-useScrollReveal(sectionRef, sectionReady)
 
 const activeCategory = ref('all')
 const revealKey = ref(0)
@@ -62,12 +57,12 @@ useSectionActive('skills', replayEntrance)
 </script>
 
 <template>
-  <section id="skills" ref="sectionRef" class="px-4 py-20 sm:px-6 lg:px-8">
-    <h2 data-reveal class="glitch-hover text-3xl font-bold sm:text-4xl" :class="{ 'auto-glitch': titleGlitch }">
+  <section id="skills" class="px-4 py-20 sm:px-6 lg:px-8">
+    <h2 class="glitch-hover text-3xl font-bold sm:text-4xl" :class="{ 'auto-glitch': titleGlitch }">
       {{ t('skills.title') }}
     </h2>
 
-    <div data-reveal class="scanline-bg scanline-flicker relative mx-auto mt-8 max-w-5xl overflow-hidden rounded-lg border border-border bg-bg-alt/50">
+    <div class="scanline-bg scanline-flicker relative mx-auto mt-8 max-w-5xl overflow-hidden rounded-lg border border-border bg-bg-alt/50">
       <div class="flex items-center gap-1.5 border-b border-border px-4 py-2.5 text-xs text-text-muted">
         <span class="h-2.5 w-2.5 rounded-full bg-border" />
         <span class="h-2.5 w-2.5 rounded-full bg-border" />

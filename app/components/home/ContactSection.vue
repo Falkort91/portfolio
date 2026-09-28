@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { socialLinks } from '~/data/social'
-import { useDissolveEnabled } from '~/composables/useDissolveEnabled'
 import { useSectionActive } from '~/composables/useSectionActive'
 import { useTitleGlitch } from '~/composables/useTitleGlitch'
 
 const { t } = useI18n()
 const config = useRuntimeConfig()
-const sectionRef = ref<HTMLElement | null>(null)
-const { enabled: dissolveEnabled } = useDissolveEnabled()
-const sectionReady = computed(() => !dissolveEnabled.value)
-useScrollReveal(sectionRef, sectionReady)
 
 const { form, errors, status, submit } = useContactForm(config.public.formspreeEndpoint)
 
@@ -21,12 +16,12 @@ useSectionActive('contact', pulseTitleGlitch)
 </script>
 
 <template>
-  <section id="contact" ref="sectionRef" class="flex min-h-screen flex-col px-4 py-20 sm:px-6 lg:px-8">
-    <h2 data-reveal class="glitch-hover text-3xl font-bold sm:text-4xl" :class="{ 'auto-glitch': titleGlitch }">{{ t('contact.title') }}</h2>
+  <section id="contact" class="flex min-h-screen flex-col px-4 py-20 sm:px-6 lg:px-8">
+    <h2 class="glitch-hover text-3xl font-bold sm:text-4xl" :class="{ 'auto-glitch': titleGlitch }">{{ t('contact.title') }}</h2>
 
     <div class="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center">
       <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:items-start">
-        <div data-reveal>
+        <div>
           <p class="text-text-muted">{{ t('contact.subtitle') }}</p>
 
           <div class="mt-6 flex flex-col gap-3">
@@ -56,7 +51,7 @@ useSectionActive('contact', pulseTitleGlitch)
           </div>
         </div>
 
-        <form data-reveal class="space-y-5" @submit.prevent="submit">
+        <form class="space-y-5" @submit.prevent="submit">
           <div class="grid gap-5 sm:grid-cols-2">
             <div>
               <label for="name" class="block text-sm font-semibold text-text-muted">{{ t('contact.name') }}</label>

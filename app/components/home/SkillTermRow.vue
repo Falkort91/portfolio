@@ -31,7 +31,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex items-center gap-2 text-sm">
+  <div class="flex min-w-0 flex-wrap items-center gap-x-2 text-sm">
     <span class="icon-spin-perspective inline-flex h-5 w-5 shrink-0">
       <span class="icon-3d text-accent-green" :style="{ animationDelay: spinDelay }">
         <Icon :name="icon" class="icon-3d-face icon-3d-face--front h-5 w-5" aria-hidden="true" />
@@ -42,6 +42,7 @@ onUnmounted(() => {
     </span>
     <span aria-hidden="true">{{ displayedText }}</span>
     <span class="sr-only">{{ text }}</span>
-    <span v-if="categoryLabel" class="text-xs text-text-muted" aria-hidden="true">// {{ categoryLabel }}</span>
+    <!-- Sur mobile, la colonne est trop étroite : le libellé passe sous le nom. -->
+    <span v-if="categoryLabel" class="w-full text-xs text-text-muted sm:w-auto" aria-hidden="true">//&nbsp;{{ categoryLabel }}</span>
   </div>
 </template>
